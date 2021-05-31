@@ -3,6 +3,7 @@ export const SECONDARY_COLOR = "#5a6d94";
 export const TERTIARY_COLOR = "#d6d6d6";
 export const HOVERED_COLOR = "#2979ff";
 export const CLICKED_COLOR = "#b71c1c";
+export const PRIMARY_COLOR_V2 = "#4169e1";
 
 export const METRICS = [
   { label: "Accuracy", value: "acc", key: "acc" },

@@ -10,75 +10,76 @@ import { PRIMARY_COLOR, TERTIARY_COLOR } from "../util/globals";
 import { withStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
-import CircularProgress from '@material-ui/core/CircularProgress';
+import CircularProgress from "@material-ui/core/CircularProgress";
 
 /* Datasets - Add new dataset imports here. */
 import compasData from "../data/compas.csv";
 import adultData from "../data/adult.csv";
 // import censusData from "../data/census.csv";
+import { PRIMARY_COLOR_V2 } from "../util/globals";
 
 const styles = {
   body: {
     display: "flex",
-    flexDirection: "inline"
+    flexDirection: "inline",
   },
   content: {
     width: "55%",
     display: "flex",
     flexDirection: "column",
     marginTop: 65,
-    marginLeft: 10
+    marginLeft: 10,
   },
   subtitle: {
     flexGrow: 1,
     color: TERTIARY_COLOR,
-    textAlign: "center"
+    textAlign: "center",
   },
   tagline: {
     flexGrow: 1,
     marginLeft: 30,
     color: TERTIARY_COLOR,
-    textAlign: "left"
+    textAlign: "left",
   },
   loadingScreen: {
     minWidth: "100%",
     minHeight: "calc(100% + 22px)",
     marginTop: -22,
-    backgroundColor: PRIMARY_COLOR,
-    margin: "0px auto"
+    backgroundColor: PRIMARY_COLOR_V2,
+    margin: "0px auto",
   },
   loadingText: {
     paddingTop: 150,
     color: "white",
-    textAlign: "center"
+    textAlign: "center",
   },
   loadingProgress: {
     display: "block",
     marginLeft: "auto",
     marginRight: "auto",
-    color: "white"
+    color: "white",
   },
   datasets: {
     width: "600px",
     margin: "0px auto",
-    marginTop: 10
+    marginTop: 10,
   },
   tabletitle: {
     marginTop: 50,
     color: "white",
-    textAlign: "center"
+    textAlign: "center",
   },
   title: {
-    fontWeight: 800
+    fontWeight: 800,
   },
   adddata: {
     color: "white",
-    textAlign: "center"
+    textAlign: "center",
   },
   dataLink: {
     textDecorationColor: "black",
     color: "black",
-    textDecoration: "none"
+    textDecoration: "none",
   },
   socialLink: {
     padding: 10,
@@ -93,26 +94,26 @@ const styles = {
     display: "flex",
     flexDirection: "row",
     alignItems: "center",
-    cursor: "pointer"
+    cursor: "pointer",
   },
   social: {
     display: "flex",
     justifyContent: "center",
-    marginTop: 70
+    marginTop: 70,
   },
   icon: {
     fontSize: 16,
-    marginRight: 10
-  }
+    marginRight: 10,
+  },
 };
 
 class Welcome extends Component {
   render() {
     let classes = this.props.classes;
 
-    let loadIcon = <></>
+    let loadIcon = "<></>";
     if (this.props.loading) {
-      loadIcon = <CircularProgress />
+      loadIcon = <CircularProgress />;
     }
 
     return (
@@ -157,7 +158,7 @@ class Welcome extends Component {
                   <Button
                     variant="contained"
                     color="primary"
-                    onClick={_ => this.props.loadData(adultData)}
+                    onClick={(_) => this.props.loadData(adultData)}
                   >
                     Select
                   </Button>
@@ -178,7 +179,7 @@ class Welcome extends Component {
                   <Button
                     variant="contained"
                     color="primary"
-                    onClick={_ => this.props.loadData(compasData)}
+                    onClick={(_) => this.props.loadData(compasData)}
                   >
                     Select
                   </Button>
@@ -208,34 +209,49 @@ class Welcome extends Component {
             </TableBody>
           </Table>
         </Paper>
-        <a href="https://github.com/poloclub/FairVis/blob/master/README.md" className={classes.adddata}>
+        <a
+          href="https://github.com/poloclub/FairVis/blob/master/README.md"
+          className={classes.adddata}
+        >
           <p>Instructions for adding a custom dataset</p>
         </a>
 
         <div className={classes.social}>
-          <a href="https://arxiv.org/abs/1904.05419">
-            <button className={classes.socialLink}>
+
+          <Button
+              style={{marginRight: 10}}
+              variant="contained"
+              href="https://arxiv.org/abs/1904.05419"
+            >
               <FaScroll className={classes.icon} />
               Full Paper
-            </button>
-          </a>
-          <a href="https://medium.com/p/acbd362a3e2f">
-            <button className={classes.socialLink}>
-              <FaMedium className={classes.icon} /> Blog
-            </button>
-          </a>
-          <a href="https://github.com/poloclub/FairVis">
-            <button className={classes.socialLink}>
+            </Button>
+            <Button
+              style={{marginRight: 10}}
+              variant="contained"
+              href="https://medium.com/p/acbd362a3e2f"
+            >
+              <FaMedium className={classes.icon} />
+              Blog
+            </Button>
+
+            <Button
+              style={{marginRight: 10}}
+              variant="contained"
+              href="https://github.com/poloclub/FairVis"
+            >
               <FaGithub className={classes.icon} />
               Code
-            </button>
-          </a>
-          <a href="https://cabreraalex.com/#/paper/fairvis">
-            <button className={classes.socialLink}>
+            </Button>
+
+            <Button
+              variant="contained"
+              href="https://cabreraalex.com/#/paper/fairvis"
+            >
               <FaGlobe className={classes.icon} />
               Cite
-            </button>
-          </a>
+            </Button>
+
         </div>
       </div>
     );
