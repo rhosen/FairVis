@@ -3,7 +3,7 @@ import Button from "@material-ui/core/Button";
 import {
   createMuiTheme,
   MuiThemeProvider,
-  withStyles
+  withStyles,
 } from "@material-ui/core/styles";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
@@ -17,7 +17,7 @@ import {
   METRICS,
   PRIMARY_COLOR,
   SECONDARY_COLOR,
-  TERTIARY_COLOR
+  TERTIARY_COLOR,
 } from "../util/globals";
 import worker from "../workers/dataLoader.js";
 import WebWorker from "../workers/WebWorker";
@@ -27,104 +27,104 @@ import GroupSuggestions from "./GroupSuggestions";
 import MetricSelector from "./MetricSelector";
 import StripPlot from "./StripPlot";
 import Welcome from "./Welcome";
-import ReactGA from 'react-ga';
+import ReactGA from "react-ga";
 
-ReactGA.initialize('UA-50459890-3');
+ReactGA.initialize("UA-50459890-3");
 ReactGA.pageview(window.location.pathname + window.location.search);
 
 const theme = createMuiTheme({
   palette: {
     primary: {
-      main: PRIMARY_COLOR
+      main: PRIMARY_COLOR,
     },
     secondary: {
-      main: SECONDARY_COLOR
-    }
+      main: SECONDARY_COLOR,
+    },
   },
   overrides: {
     MuiSlider: {
       thumb: {
-        backgroundColor: "#EBEBEB"
+        backgroundColor: "#EBEBEB",
       },
       track: {
-        backgroundColor: "#EBEBEB"
-      }
-    }
-  }
+        backgroundColor: "#EBEBEB",
+      },
+    },
+  },
 });
 
 const styles = {
   appBar: {
-    zIndex: 1
+    zIndex: 1,
   },
   body: {
     display: "flex",
-    flexDirection: "inline"
+    flexDirection: "inline",
   },
   content: {
     width: "55%",
     display: "flex",
     flexDirection: "column",
     marginTop: 65,
-    marginLeft: 10
+    marginLeft: 10,
   },
   plot: {
-    width: "100%"
+    width: "100%",
   },
   slider: {
     width: 150,
     padding: 20,
-    marginRight: 30
+    marginRight: 30,
   },
   reset: {
-    float: "right"
+    float: "right",
   },
   subtitle: {
     flexGrow: 1,
     color: TERTIARY_COLOR,
-    textAlign: "center"
+    textAlign: "center",
   },
   tagline: {
     flexGrow: 1,
     marginLeft: 30,
     color: TERTIARY_COLOR,
-    textAlign: "left"
+    textAlign: "left",
   },
   loadingScreen: {
     minWidth: "100%",
     minHeight: "calc(100% + 22px)",
     marginTop: -22,
     backgroundColor: PRIMARY_COLOR,
-    margin: "0px auto"
+    margin: "0px auto",
   },
   loadingText: {
     paddingTop: 150,
     color: "white",
-    textAlign: "center"
+    textAlign: "center",
   },
   loadingProgress: {
     display: "block",
     marginLeft: "auto",
     marginRight: "auto",
-    color: "white"
+    color: "white",
   },
   datasets: {
     width: "600px",
     margin: "0px auto",
-    marginTop: 10
+    marginTop: 10,
   },
   tabletitle: {
     marginTop: 50,
     color: "white",
-    textAlign: "center"
+    textAlign: "center",
   },
   title: {
-    fontWeight: 800
+    fontWeight: 800,
   },
   adddata: {
     color: "white",
-    textAlign: "center"
-  }
+    textAlign: "center",
+  },
 };
 
 class App extends Component {
@@ -174,13 +174,13 @@ class App extends Component {
     };
   }
 
-  loadData = data => {
+  loadData = (data) => {
     this.setState({ loading: 1 });
 
     // WebWorker to run preprocessing in parallel.
     let loaderWorker = new WebWorker(worker);
 
-    loaderWorker.addEventListener("message", r => {
+    loaderWorker.addEventListener("message", (r) => {
       let out = r.data;
       let clusters = getClusters(out.data, out.feats, out.vals);
       this.setState({
@@ -191,13 +191,13 @@ class App extends Component {
         values: out.vals,
         clusters: clusters,
         dataLoaded: true,
-        clustersLoaded: true
+        clustersLoaded: true,
       });
     });
-    d3.csv(data).then(d => loaderWorker.postMessage(d));
+    d3.csv(data).then((d) => loaderWorker.postMessage(d));
   };
 
-  createSubgroups = groups => {
+  createSubgroups = (groups) => {
     // TODO: Prevent adding duplicate subgroups
     let subgroups = createSubgroups(
       this.state.data,
@@ -207,16 +207,16 @@ class App extends Component {
       this.state.values
     );
     this.setState({
-      activeGroups: this.state.activeGroups.concat(subgroups)
+      activeGroups: this.state.activeGroups.concat(subgroups),
     });
   };
 
   // Either -1 or the cluster that was hovered.
-  suggestedHover = clust => {
+  suggestedHover = (clust) => {
     d3.selectAll(".linehover").classed("linehover", false);
 
     const foundArr = this.state.activeGroups.filter(
-      el => el.clusterid === clust.clusterid
+      (el) => el.clusterid === clust.clusterid
     );
 
     if (foundArr.length === 0) {
@@ -225,7 +225,7 @@ class App extends Component {
       this.setState(
         {
           activeGroups: this.state.activeGroups.concat(clust),
-          hovered: clust.id
+          hovered: clust.id,
         },
         () => {
           d3.selectAll("#linecluster" + clust.id).classed("linehover", true);
@@ -239,7 +239,7 @@ class App extends Component {
       d3.selectAll("#linecluster" + foundArr[0].id).classed("linehover", true);
       this.setState(
         {
-          hovered: foundArr[0].id
+          hovered: foundArr[0].id,
         },
         () => {
           d3.selectAll("#linecluster" + this.state.clicked).classed(
@@ -251,17 +251,17 @@ class App extends Component {
     }
   };
 
-  suggestedUnhover = clust => {
+  suggestedUnhover = (clust) => {
     d3.selectAll(".linehover").classed("linehover", false);
 
     let newActives = this.state.activeGroups.filter(
-      e => e.id === this.state.clicked || e.id !== clust.id
+      (e) => e.id === this.state.clicked || e.id !== clust.id
     );
 
     this.setState(
       {
         activeGroups: newActives,
-        hovered: -1
+        hovered: -1,
       },
       () => {
         d3.selectAll("#linecluster" + this.state.clicked).classed(
@@ -276,11 +276,11 @@ class App extends Component {
    * Have to set id to length -1 since groups gets added once on hover then again
    * on click. If not it breaks when hovering later on
    */
-  suggestedClick = clust => {
+  suggestedClick = (clust) => {
     d3.selectAll(".lineclick").classed("lineclick", false);
 
     const foundArr = this.state.activeGroups.filter(
-      el => el.clusterid === clust.clusterid
+      (el) => el.clusterid === clust.clusterid
     );
 
     if (foundArr.length === 0) {
@@ -289,7 +289,7 @@ class App extends Component {
       this.setState(
         {
           activeGroups: this.state.activeGroups.concat(clust),
-          clicked: clust.id
+          clicked: clust.id,
         },
         () => {
           d3.selectAll("#linecluster" + clust.id).classed("lineclick", true);
@@ -298,33 +298,33 @@ class App extends Component {
     } else {
       d3.selectAll("#linecluster" + foundArr[0].id).classed("lineclick", true);
       this.setState({
-        clicked: foundArr[0].id
+        clicked: foundArr[0].id,
       });
     }
   };
 
-  barHover = id => {
+  barHover = (id) => {
     d3.selectAll(".linehover").classed("linehover", false);
 
     d3.selectAll("#linecluster" + id).classed("linehover", true);
 
     this.setState({
-      hovered: id
+      hovered: id,
     });
   };
 
-  barClick = id => {
+  barClick = (id) => {
     d3.selectAll(".lineclick").classed("lineclick", false);
     d3.selectAll("#linecluster" + id).classed("lineclick", true);
 
     this.setState({
-      clicked: id
+      clicked: id,
     });
   };
 
   changeMinSize = (_, val) => {
     this.setState({
-      minSize: val
+      minSize: val,
     });
   };
 
@@ -333,13 +333,13 @@ class App extends Component {
       hovered: -1,
       clicked: -1,
       minSize: 0,
-      activeGroups: []
+      activeGroups: [],
     });
   };
 
-  handleMetricsChange = m => {
+  handleMetricsChange = (m) => {
     this.setState({
-      selectedMetrics: m
+      selectedMetrics: m,
     });
   };
 
@@ -378,7 +378,7 @@ class App extends Component {
               max={
                 this.state.activeGroups.length === 0
                   ? 0
-                  : d3.max(this.state.activeGroups, d => d.metrics.size)
+                  : d3.max(this.state.activeGroups, (d) => d.metrics.size)
               }
             />
             <Button
@@ -419,7 +419,7 @@ class App extends Component {
                 selectedMetrics={this.state.selectedMetrics}
               />
             </div>
-            <GroupSuggestions
+            {/* <GroupSuggestions
               clusters={this.state.clusters}
               minSize={this.state.minSize}
               suggestedHover={this.suggestedHover}
@@ -430,14 +430,33 @@ class App extends Component {
               values={this.state.values}
               clicked={this.state.clicked}
               activeGroups={this.state.activeGroups}
+            /> */}
+            <ExpandedCard
+              hovered={this.state.hovered}
+              clicked={this.state.clicked}
+              activeGroups={this.state.activeGroups}
+              selectedMetrics={this.state.selectedMetrics}
+              clusters={this.state.clusters}
             />
           </div>
-          <ExpandedCard
+          {/* <ExpandedCard
             hovered={this.state.hovered}
             clicked={this.state.clicked}
             activeGroups={this.state.activeGroups}
             selectedMetrics={this.state.selectedMetrics}
             clusters={this.state.clusters}
+          /> */}
+          <GroupSuggestions
+            clusters={this.state.clusters}
+            minSize={this.state.minSize}
+            suggestedHover={this.suggestedHover}
+            suggestedUnhover={this.suggestedUnhover}
+            suggestedClick={this.suggestedClick}
+            clustersLoaded={this.state.clustersLoaded}
+            features={this.state.features}
+            values={this.state.values}
+            clicked={this.state.clicked}
+            activeGroups={this.state.activeGroups}
           />
         </div>
       </MuiThemeProvider>

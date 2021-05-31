@@ -14,50 +14,51 @@ import MetricsDistribution from "./MetricsDistribution";
 import Button from "@material-ui/core/Button";
 import Divider from "@material-ui/core/Divider";
 import { HOVERED_COLOR, CLICKED_COLOR } from "../util/globals";
+import Grid from "@material-ui/core/Grid";
 
 const styles = {
   card: {
-    width: "25%",
-    height: "100%",
     marginTop: 70,
     marginRight: 10,
-    overflow: "scroll"
+    height: "40%",
+    overflow: "scroll",
   },
   featureStyle: {
-    textAlign: "justify"
+    textAlign: "justify",
   },
   avatar: {
-    backgroundColor: "#1D2737"
+    backgroundColor: "#1D2737",
   },
   expand: {
-    margin: "0px auto"
+    margin: "0px auto",
   },
   metrics: {
-    marginTop: 10
+    marginTop: 10,
   },
   hovered: {
     color: HOVERED_COLOR,
-    paddingRight: 8
+    paddingRight: 8,
   },
   clicked: {
-    color: CLICKED_COLOR
+    color: CLICKED_COLOR,
   },
   header: {
     display: "flex",
     flexDirection: "inline",
     justifyContent: "space-between",
     padding: 7,
-    marginBottom: 5
+    marginBottom: 5,
   },
   selectedGroups: {
-    marginTop: 8
+    marginTop: 8,
   },
   feats: {
-    paddingLeft: 8
+    marginTop: 5,
+    paddingLeft: 8,
   },
   hoveredCell: {
-    paddingRight: 8
-  }
+    paddingRight: 8,
+  },
 };
 
 class ExpandedCard extends Component {
@@ -123,7 +124,9 @@ class ExpandedCard extends Component {
       if (this.props.hovered !== -1 && hoveredGroup.feats.includes(feat)) {
         hoveredCell = (
           <TableCell align={"right"}>
-            <span className={classes.hoveredCell}>{hoveredGroup.vals[hoveredGroup.feats.indexOf(feat)]}</span>
+            <span className={classes.hoveredCell}>
+              {hoveredGroup.vals[hoveredGroup.feats.indexOf(feat)]}
+            </span>
           </TableCell>
         );
       }
@@ -152,45 +155,53 @@ class ExpandedCard extends Component {
             </Button>
           </div>
           <Divider />
-          <MetricsDistribution
-            hoveredGroup={hoveredGroup}
-            clickedGroup={clickedGroup}
-            selectedMetrics={this.props.selectedMetrics}
-          />
-          <ClassDistribution
-            hoveredGroup={hoveredGroup}
-            clickedGroup={clickedGroup}
-          />
-          <Paper className={classes.feats}>
-            <Table className={classes.table} padding="none" size="small">
-              <colgroup>
-                <col style={{ width: "33%" }} />
-                <col style={{ width: "33%" }} />
-                <col style={{ width: "33%" }} />
-              </colgroup>
-              <TableHead className={classes.tableHeader}>
-                <TableRow key={0}>
-                  <TableCell className={classes.feat}>Feature</TableCell>
-                  <TableCell align="right">
-                    <span className={classes.clicked}>Pinned</span>
-                  </TableCell>
-                  <TableCell align="right">
-                    <span className={classes.hovered}>Hovered</span>
-                  </TableCell>
-                </TableRow>
-                <TableRow key={1}>
-                  <TableCell>Size</TableCell>
-                  <TableCell align="right">
-                    {clickedGroup && clickedGroup.metrics.size}
-                  </TableCell>
-                  <TableCell align="right">
-                    <span className={classes.hoveredCell}>{hoveredGroup && hoveredGroup.metrics.size}</span>
-                  </TableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>{feats}</TableBody>
-            </Table>
-          </Paper>
+          <Grid container spacing={3}>
+            <Grid item xs={6}>
+              <MetricsDistribution
+                hoveredGroup={hoveredGroup}
+                clickedGroup={clickedGroup}
+                selectedMetrics={this.props.selectedMetrics}
+              />
+              <ClassDistribution
+                hoveredGroup={hoveredGroup}
+                clickedGroup={clickedGroup}
+              />
+            </Grid>
+            <Grid item xs={6}>
+              <Paper className={classes.feats}>
+                <Table className={classes.table} padding="none" size="small">
+                  <colgroup>
+                    <col style={{ width: "33%" }} />
+                    <col style={{ width: "33%" }} />
+                    <col style={{ width: "33%" }} />
+                  </colgroup>
+                  <TableHead className={classes.tableHeader}>
+                    <TableRow key={0}>
+                      <TableCell className={classes.feat}>Feature</TableCell>
+                      <TableCell align="right">
+                        <span className={classes.clicked}>Pinned</span>
+                      </TableCell>
+                      <TableCell align="right">
+                        <span className={classes.hovered}>Hovered</span>
+                      </TableCell>
+                    </TableRow>
+                    <TableRow key={1}>
+                      <TableCell>Size</TableCell>
+                      <TableCell align="right">
+                        {clickedGroup && clickedGroup.metrics.size}
+                      </TableCell>
+                      <TableCell align="right">
+                        <span className={classes.hoveredCell}>
+                          {hoveredGroup && hoveredGroup.metrics.size}
+                        </span>
+                      </TableCell>
+                    </TableRow>
+                  </TableHead>
+                  <TableBody>{feats}</TableBody>
+                </Table>
+              </Paper>
+            </Grid>
+          </Grid>
         </CardContent>
       </Card>
     );

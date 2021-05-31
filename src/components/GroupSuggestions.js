@@ -19,79 +19,83 @@ import { CLICKED_COLOR, METRICS } from "../util/globals";
 import { getNeighbors } from "../util/neighboringClusters";
 import { TableHead } from "@material-ui/core";
 import "../style/GroupSuggestions.css";
+import Grid from "@material-ui/core/Grid";
 
 const styles = {
   paper: {
-    height: 350,
+    width: "32%",
+    // height: 720,
+    height: "90vh",
     overflow: "scroll",
     marginLeft: 20,
     marginRight: 20,
-    marginTop: 30
+    marginTop: 70,
   },
   metrics: {
     display: "flex",
     flexDirection: "inline",
     justifyContent: "space-between",
-    padding: 7
+    padding: 7,
   },
   header: {
     display: "flex",
     flexDirection: "inline",
     justifyContent: "space-between",
-    padding: 7
+    padding: 7,
   },
   cards: {
     display: "flex",
     flexDirection: "inline",
-    justifyContent: "center"
+    justifyContent: "center",
   },
   cardContent: {
-    padding: 0
+    padding: 0,
   },
   divider: {
     marginTop: 10,
-    marginBottom: 10
+    marginBottom: 10,
   },
   headerDivider: {
-    marginBottom: 7
+    marginBottom: 7,
   },
   table: {
-    width: "100%"
+    width: "100%",
   },
   fab: {
-    float: "right"
+    float: "right",
   },
   paging: {
     float: "right",
     display: "inline-flex",
     marginTop: 7,
-    justifyContent: "center"
+    justifyContent: "center",
   },
   label: {
-    textTransform: "capitalize"
+    textTransform: "capitalize",
   },
   value: {
-    color: "#718C73"
+    color: "#718C73",
   },
   similarGroups: {
     display: "inline-flex",
     flexWrap: "wrap",
-    justifyContent: "center"
+    justifyContent: "center",
   },
   settings: {
-    display: "inline-flex"
+    display: "inline-flex",
   },
   sortText: {
     marginRight: 13,
-    marginTop: 7
+    marginTop: 7,
+    marginLeft: 10,
   },
   diffTable: {
-    marginTop: 10
+    marginTop: 10,
   },
   leftCell: {
     paddingLeft: "10px",
-    maxWidth: 50
-  }
+    maxWidth: 50,
+  },
 };
 
 class GroupSuggestions extends Component {
@@ -102,7 +106,7 @@ class GroupSuggestions extends Component {
       page: 0,
       showSimilar: false,
       neighbors: [],
-      sort: "acc"
+      sort: "acc",
     };
   }
   shouldComponentUpdate(nextProps) {
@@ -112,22 +116,22 @@ class GroupSuggestions extends Component {
     return false;
   }
 
-  mouseEnter = cluster => {
+  mouseEnter = (cluster) => {
     this.props.suggestedHover(cluster);
   };
 
-  mouseLeave = cluster => {
+  mouseLeave = (cluster) => {
     this.props.suggestedUnhover(cluster);
   };
 
-  mouseClick = cluster => {
+  mouseClick = (cluster) => {
     this.props.suggestedClick(cluster);
   };
 
   pageRight = () => {
     if (this.state.page * 2 + 3 < this.props.clusters.length) {
       this.setState({
-        page: this.state.page + 1
+        page: this.state.page + 1,
       });
     }
   };
@@ -135,15 +139,15 @@ class GroupSuggestions extends Component {
   pageLeft = () => {
     if (this.state.page !== 0) {
       this.setState({
-        page: this.state.page - 1
+        page: this.state.page - 1,
       });
     }
   };
 
-  changeView = val => {
+  changeView = (val) => {
     if (val.target.value === 0) {
       this.setState({
-        showSimilar: false
+        showSimilar: false,
       });
     } else {
       if (this.props.clicked !== -1) {
@@ -152,19 +156,19 @@ class GroupSuggestions extends Component {
             this.props.activeGroups[this.props.clicked],
             this.props.activeGroups.slice()
           ),
-          showSimilar: true
+          showSimilar: true,
         });
       } else {
         this.setState({
-          showSimilar: true
+          showSimilar: true,
         });
       }
     }
   };
 
-  changeSort = val => {
+  changeSort = (val) => {
     this.setState({
-      sort: val.target.value
+      sort: val.target.value,
     });
   };
 
@@ -172,7 +176,11 @@ class GroupSuggestions extends Component {
     let classes = this.props.classes;
 
     // SIMILAR subgroups
-    if (this.state.showSimilar && this.state.neighbors.length !== 0 && this.props.clicked !== -1) {
+    if (
+      this.state.showSimilar &&
+      this.state.neighbors.length !== 0 &&
+      this.props.clicked !== -1
+    ) {
       let clickedGroup = this.props.activeGroups[this.props.clicked];
       let similarGroups = this.state.neighbors
         .sort((a, b) => {
@@ -183,9 +191,9 @@ class GroupSuggestions extends Component {
             <Card
               className={"similar-card"}
               key={index}
-              onMouseEnter={_ => this.mouseEnter(neigh)}
-              onMouseLeave={_ => this.mouseLeave(neigh)}
-              onClick={_ => this.mouseClick(neigh)}
+              onMouseEnter={(_) => this.mouseEnter(neigh)}
+              onMouseLeave={(_) => this.mouseLeave(neigh)}
+              onClick={(_) => this.mouseClick(neigh)}
             >
               <CardContent className={classes.cardContent}>
                 <Table className={classes.table} padding="dense">
@@ -246,12 +254,16 @@ class GroupSuggestions extends Component {
               </Select>
             </FormControl>
             <div className={classes.settings}>
-              <Typography variant="body1" className={classes.sortText}>
+              <Typography
+                variant="body1"
+                className={classes.sortText}
+                display="block"
+              >
                 Sort by:
               </Typography>
               <FormControl>
                 <Select value={this.state.sort} onChange={this.changeSort}>
-                  {METRICS.map(m => (
+                  {METRICS.map((m) => (
                     <MenuItem value={m.value}>{m.label}</MenuItem>
                   ))}
                 </Select>
@@ -266,7 +278,7 @@ class GroupSuggestions extends Component {
       // SUGGESTED subgroups
       // Get least performing subgroups.
       let bottomClusters = this.props.clusters
-        .filter(clust => clust.metrics.size > this.props.minSize)
+        .filter((clust) => clust.metrics.size > this.props.minSize)
         .sort((a, b) => {
           return a.metrics[this.state.sort] - b.metrics[this.state.sort];
         })
@@ -276,9 +288,9 @@ class GroupSuggestions extends Component {
         <Card
           className={"suggested-card"}
           key={index}
-          onMouseEnter={_ => this.mouseEnter(clust)}
-          onMouseLeave={_ => this.mouseLeave(clust)}
-          onClick={_ => this.mouseClick(clust)}
+          onMouseEnter={(_) => this.mouseEnter(clust)}
+          onMouseLeave={(_) => this.mouseLeave(clust)}
+          onClick={(_) => this.mouseClick(clust)}
         >
           <CardContent className={classes.cardContent}>
             <Table className={classes.table} padding="none">
@@ -334,8 +346,10 @@ class GroupSuggestions extends Component {
               </Typography>
               <FormControl>
                 <Select value={this.state.sort} onChange={this.changeSort}>
-                  {METRICS.map(m => (
-                    <MenuItem key={m.label} value={m.value}>{m.label}</MenuItem>
+                  {METRICS.map((m) => (
+                    <MenuItem key={m.label} value={m.value}>
+                      {m.label}
+                    </MenuItem>
                   ))}
                 </Select>
               </FormControl>
@@ -352,7 +366,14 @@ class GroupSuggestions extends Component {
             </div>
           </div>
           <Divider className={classes.headerDivider} />
-          <div className={classes.cards}>{cards}</div>
+          <Grid container spacing={3}>
+            <Grid item xs={12}>
+              <div className={classes.cards}>{cards[0]}</div>
+            </Grid>
+            <Grid item xs={12}>
+              <div className={classes.cards}>{cards[1]}</div>
+            </Grid>
+          </Grid>
         </Paper>
       );
     }
