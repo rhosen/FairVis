@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/FairVis/precache-manifest.a049756f2252f0505674b153dc189f62.js"
+  "/FairVis/precache-manifest.2df3623be0415a0891d48c4f6eaa3ad5.js"
 );
 
 self.addEventListener('message', (event) => {
