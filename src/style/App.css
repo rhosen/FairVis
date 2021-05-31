@@ -20,9 +20,17 @@ li svg.box-plot {
     pointer-events: none;
 }
 
-::-webkit-scrollbar { 
-    display: none; 
-}
+
+
+::-webkit-scrollbar {
+    width: 0.2rem !important;
+    overflow-y: auto !important;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background-color: #1D2737 !important;
+  }
+  
 
 html, body {
     height: 100%;
