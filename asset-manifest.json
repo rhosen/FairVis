@@ -1,17 +1,17 @@
 {
   "files": {
-    "main.css": "/FairVis/static/css/main.9fa74223.chunk.css",
-    "main.js": "/FairVis/static/js/main.4f7a5287.chunk.js",
-    "main.js.map": "/FairVis/static/js/main.4f7a5287.chunk.js.map",
+    "main.css": "/FairVis/static/css/main.61103595.chunk.css",
+    "main.js": "/FairVis/static/js/main.d796fd3d.chunk.js",
+    "main.js.map": "/FairVis/static/js/main.d796fd3d.chunk.js.map",
     "runtime~main.js": "/FairVis/static/js/runtime~main.15f444ac.js",
     "runtime~main.js.map": "/FairVis/static/js/runtime~main.15f444ac.js.map",
-    "static/js/2.e3cd5568.chunk.js": "/FairVis/static/js/2.e3cd5568.chunk.js",
-    "static/js/2.e3cd5568.chunk.js.map": "/FairVis/static/js/2.e3cd5568.chunk.js.map",
+    "static/js/2.e2dc0803.chunk.js": "/FairVis/static/js/2.e2dc0803.chunk.js",
+    "static/js/2.e2dc0803.chunk.js.map": "/FairVis/static/js/2.e2dc0803.chunk.js.map",
     "index.html": "/FairVis/index.html",
-    "precache-manifest.c4c87f513ce03ccf4927e199ef4fcca7.js": "/FairVis/precache-manifest.c4c87f513ce03ccf4927e199ef4fcca7.js",
+    "precache-manifest.a049756f2252f0505674b153dc189f62.js": "/FairVis/precache-manifest.a049756f2252f0505674b153dc189f62.js",
     "service-worker.js": "/FairVis/service-worker.js",
-    "static/css/main.9fa74223.chunk.css.map": "/FairVis/static/css/main.9fa74223.chunk.css.map",
-    "static/media/adult.csv": "/FairVis/static/media/adult.f0b32474.csv",
-    "static/media/compas.csv": "/FairVis/static/media/compas.6aa63d4a.csv"
+    "static/css/main.61103595.chunk.css.map": "/FairVis/static/css/main.61103595.chunk.css.map",
+    "static/media/adult.csv": "/FairVis/static/media/adult.94c06f58.csv",
+    "static/media/compas.csv": "/FairVis/static/media/compas.bd26b7d4.csv"
   }
 }
