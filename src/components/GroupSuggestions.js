@@ -24,7 +24,6 @@ import Grid from "@material-ui/core/Grid";
 const styles = {
   paper: {
     width: "32%",
-    // height: 720,
     height: "90vh",
     overflow: "scroll",
     marginLeft: 20,
