@@ -20,7 +20,8 @@ const styles = {
   card: {
     marginTop: 70,
     marginRight: 10,
-    height: "40%",
+    height: "44%",
+    minHeight: "44%",
     overflow: "scroll",
   },
   featureStyle: {
