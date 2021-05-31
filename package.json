@@ -2,7 +2,7 @@
   "name": "fairvis",
   "version": "1.0.0",
   "private": true,
-  "homepage": "https://poloclub.github.io/FairVis",
+  "homepage": "https://rhosen.github.io/FairVis",
   "dependencies": {
     "@material-ui/core": "^3.9.2",
     "@material-ui/icons": "^3.0.2",
