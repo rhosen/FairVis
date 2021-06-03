@@ -123,7 +123,7 @@ class Welcome extends Component {
           color="inherit"
           className={classes.loadingText}
         >
-          <strong>FairVis</strong>{" "}
+          <strong>FairVis V2</strong>{" "}
         </Typography>
         <Typography variant="h6" className={classes.subtitle}>
           Audit Classification Models for Intersectional Bias
