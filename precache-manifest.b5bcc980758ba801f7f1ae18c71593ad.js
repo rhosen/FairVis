@@ -1,10 +1,10 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "291de9fa7d9d0ab8c69462da6aa21f46",
+    "revision": "96a1aa67fd3ba03cb876aafc80ffbbf9",
     "url": "/FairVis/index.html"
   },
   {
-    "revision": "e5c74a41a5dc06e93e4f",
+    "revision": "9e6a88e9b4a8556f2991",
     "url": "/FairVis/static/css/main.ab4d9660.chunk.css"
   },
   {
@@ -12,8 +12,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/FairVis/static/js/2.4ac1dffe.chunk.js"
   },
   {
-    "revision": "e5c74a41a5dc06e93e4f",
-    "url": "/FairVis/static/js/main.bdfee5d6.chunk.js"
+    "revision": "9e6a88e9b4a8556f2991",
+    "url": "/FairVis/static/js/main.527d1715.chunk.js"
   },
   {
     "revision": "34730e01619f251436ec",
